@@ -1,2 +1,2 @@
 configurations.maybeCreate("default")
-artifacts.add("default", file('quicktale.jar'))
+artifacts.add("default", file('classes.jar'))
