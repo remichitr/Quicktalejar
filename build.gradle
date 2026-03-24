@@ -1,20 +1,23 @@
 plugins {
+    id 'java-library'
     id 'maven-publish'
 }
 
 group = 'com.github.remichitr'
-version = '1.1.0' // Versiyonu artırdık
+version = '1.2.0' // Yeni versiyon
 
 publishing {
     publications {
         maven(MavenPublication) {
-            groupId group
-            artifactId 'Quicktalejar'
-            version version
+            groupId = group
+            artifactId = 'Quicktalejar'
+            version = version
             
-            // GitHub'daki JAR dosyasının adı 'classes.jar' ise burası doğru.
-            // Değilse, tırnak içindeki ismi JAR dosyanın adıyla aynı yap.
-            artifact(file('classes.jar')) 
+            // Bu satır JitPack'in 'assemble' hatasını çözer
+            artifact(file('classes.jar'))
         }
     }
 }
+
+// JitPack'in aradığı ama bulamadığı 'assemble' görevini sahte olarak tanımlıyoruz
+task assemble {}
