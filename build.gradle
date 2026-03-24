@@ -1,2 +1,28 @@
-configurations.maybeCreate("default")
-artifacts.add("default", file('classes.jar'))
+plugins {
+    id 'maven-publish'
+}
+
+library_name = 'Quicktalejar'
+group = 'com.github.remichitr'
+version = '1.0.0'
+
+// JAR dosyasının adını buraya tam olarak yaz (GitHub'da classes.jar ise öyle kalsın)
+def jarFileName = 'classes.jar' 
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId group
+            artifactId library_name
+            version version
+
+            // GitHub'daki JAR dosyasını artifact olarak tanımlıyoruz
+            artifact(file(jarFileName))
+        }
+    }
+}
+
+// JitPack'in hata vermemesi için boş bir task ekliyoruz
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
